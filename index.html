@@ -1,3 +1,4 @@
+
 html
 
 <html lang="hi">
@@ -32,15 +33,15 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
 <div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
 </div>
-<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>असली AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
+<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
 <div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
 </div>
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// नीचे दिए गए इन "" के बीच में अपनी नई AQ. वाली चाबी डालें
-const API_KEY = "AQ.Ab8RN6IkbbEscg-l4FtD92J4fa5zBk7TD4ixSFWmiRUJyl4Ttw"; 
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+// नीचे दिए गए इन "" के बीच में अपनी नोटपैड वाली gsk_ वाली चाबी पेस्ट करें
+const API_KEY = "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"; 
+const API_URL = "https://api.groq.com/openai/v1/chat/completions";
 
 function p(t){input.value=t;input.focus()}
 function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
@@ -60,18 +61,21 @@ async function send(){
     try {
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${API_KEY}`
+            },
             body: JSON.stringify({
-                contents: [{ parts: [{ text: q }] }]
+                model: "llama-3.3-70b-versatile",
+                messages: [{ role: "user", content: q }]
             })
         });
         
         const data = await response.json();
         loadingDiv.remove(); 
         
-        // नए API रेस्पॉन्स फॉर्मेट को सही से हैंडल करने के लिए चेक
-        if (data && data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
-            let aiReply = data.candidates[0].content.parts[0].text;
+        if (data && data.choices && data.choices[0] && data.choices[0].message) {
+            let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
         } else if (data && data.error) {
             add("API Error: " + data.error.message, 'bot');
@@ -80,7 +84,7 @@ async function send(){
         }
     } catch (error) {
         loadingDiv.remove();
-        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया जांचें।", 'bot');
+        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जांचें।", 'bot');
     }
 }
 
@@ -90,4 +94,4 @@ function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="f
 </body>
 </html>
 
-Use code with caution.1
+Use code with caution.
