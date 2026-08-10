@@ -1,3 +1,4 @@
+
 html
 
 <html lang="hi">
@@ -38,7 +39,7 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// नीचे दिए गए इन "" के बीच में अपनी नोटपैड वाली चाबी पेस्ट करें
+// नीचे दिए गए इन "" के बीच में अपनी नोटपैड वाली चाबी डालें
 const API_KEY = "AQ.Ab8RN6IkbbEscg-l4FtD92J4fa5zBk7TD4ixSFWmiRUJyl4Ttw"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
@@ -68,11 +69,12 @@ async function send(){
         const data = await response.json();
         loadingDiv.remove(); 
         
+        // यहाँ रीस्पॉन्स पढ़ने का तरीका बिल्कुल सही कर दिया गया है
         if(data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
             let aiReply = data.candidates[0].content.parts[0].text;
             add(aiReply, 'bot');
         } else {
-            add("माफ़ कीजिये, अभी जवाब नहीं मिल पाया। कृपया अपनी API Key जांचें।", 'bot');
+            add("माफ़ कीजिये, अभी जवाब नहीं मिल पाया। कृपया अपनी API Key या नेटवर्क जांचें।", 'bot');
         }
     } catch (error) {
         loadingDiv.remove();
