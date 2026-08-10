@@ -37,8 +37,9 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 </div>
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
-// आपकी Google Gemini API की चाबी सुरक्षित रूप से नीचे लगा दी गई है
-const API_KEY = "AQ.Ab8RN6lkbbEscg-l4FtD92J4fa5z"; 
+
+// नीचे दिए गए इन "" के बीच में अपनी नोटपैड वाली चाबी पेस्ट करें
+const API_KEY = "AQ.Ab8RN6IkbbEscg-l4FtD92J4fa5zBk7TD4ixSFWmiRUJyl4Ttw"; 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 function p(t){input.value=t;input.focus()}
@@ -50,7 +51,6 @@ async function send(){
     add(q,'user');
     input.value='';
     
-    // स्क्रीन पर लोडिंग दिखाने के लिए
     let loadingDiv = document.createElement('div');
     loadingDiv.className = 'msg bot';
     loadingDiv.textContent = 'सोच रहा हूँ...⏳';
@@ -66,17 +66,17 @@ async function send(){
             })
         });
         const data = await response.json();
-        loadingDiv.remove(); // लोडिंग हटाएँ
+        loadingDiv.remove(); 
         
-        if(data.candidates && data.candidates[0].content.parts[0].text) {
+        if(data.candidates && data.candidates[0] && data.candidates[0].content && data.candidates[0].content.parts && data.candidates[0].content.parts[0]) {
             let aiReply = data.candidates[0].content.parts[0].text;
             add(aiReply, 'bot');
         } else {
-            add("माफ़ कीजिये, अभी जवाब नहीं मिल पाया। कृपया दोबारा प्रयास करें।", 'bot');
+            add("माफ़ कीजिये, अभी जवाब नहीं मिल पाया। कृपया अपनी API Key जांचें।", 'bot');
         }
     } catch (error) {
         loadingDiv.remove();
-        add("नेटवर्क या चाबी (API Key) में कुछ दिक्कत आ रही है। कृपया बाद में जांचें।", 'bot');
+        add("नेटवर्क या चाबी (API Key) में कुछ दिक्कत आ रही है। कृपया जांचें।", 'bot');
     }
 }
 
