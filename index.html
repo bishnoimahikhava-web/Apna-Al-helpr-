@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+html
+
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
@@ -31,24 +32,58 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
 <div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
 </div>
-<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>अभी यह free demo है। असली AI जोड़ने के लिए बाद में AI API लगानी होगी।</small></div></div>
+<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>असली AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
 <div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
 </div>
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
+// आपकी Google Gemini API की चाबी सुरक्षित रूप से नीचे लगा दी गई है
+const API_KEY = "AQ.Ab8RN6lkbbEscg-l4FtD92J4fa5z"; 
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
 function p(t){input.value=t;input.focus()}
 function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
-function send(){let q=input.value.trim();if(!q)return;add(q,'user');input.value='';setTimeout(()=>add(reply(q),'bot'),300)}
-function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
-function reply(q){
- let x=q.toLowerCase();
- if(/2\s*[+＋]\s*2/.test(x))return '2 + 2 = 4';
- if(x.includes('नमस्ते')||x.includes('hello')||x==='hi')return 'नमस्ते! अपना सवाल लिखिए, मैं मदद करने के लिए तैयार हूँ।';
- if(x.includes('गणित')||x.includes('math'))return 'अपना पूरा गणित का सवाल लिखें। उदाहरण: 25 × 16 या x² + 5x + 6 = 0';
- if(x.includes('आवेदन')||x.includes('application'))return 'आवेदन किस विषय पर चाहिए और किसे देना है, यह लिखें।';
- return 'आपका सवाल मिल गया। यह अभी free demo mode है। असली AI जैसा जवाब पाने के लिए इस website में AI API जोड़नी होगी।';
+
+async function send(){
+    let q=input.value.trim();
+    if(!q)return;
+    add(q,'user');
+    input.value='';
+    
+    // स्क्रीन पर लोडिंग दिखाने के लिए
+    let loadingDiv = document.createElement('div');
+    loadingDiv.className = 'msg bot';
+    loadingDiv.textContent = 'सोच रहा हूँ...⏳';
+    chat.appendChild(loadingDiv);
+    window.scrollTo(0,document.body.scrollHeight);
+
+    try {
+        const response = await fetch(API_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: q }] }]
+            })
+        });
+        const data = await response.json();
+        loadingDiv.remove(); // लोडिंग हटाएँ
+        
+        if(data.candidates && data.candidates[0].content.parts[0].text) {
+            let aiReply = data.candidates[0].content.parts[0].text;
+            add(aiReply, 'bot');
+        } else {
+            add("माफ़ कीजिये, अभी जवाब नहीं मिल पाया। कृपया दोबारा प्रयास करें।", 'bot');
+        }
+    } catch (error) {
+        loadingDiv.remove();
+        add("नेटवर्क या चाबी (API Key) में कुछ दिक्कत आ रही है। कृपया बाद में जांचें।", 'bot');
+    }
 }
+
+function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
 function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p></div>'}
 </script>
 </body>
 </html>
+
+Use code with caution.
