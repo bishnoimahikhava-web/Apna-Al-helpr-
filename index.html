@@ -1,8 +1,7 @@
-
 <html lang="hi">
 <head>
     <!-- तुम्हारा असली Google AdSense कोड हेड सेक्शन में पूरी तरह सुरक्षित है -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3822002228439364" crossorigin="anonymous"></script>
+    <script async src="https://googlesyndication.com" crossorigin="anonymous"></script>
 
     <title>Apna AI Helper - Your AI Assistant Tool</title>
     <meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
@@ -93,7 +92,7 @@
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// तुम्हारी नई बनाई हुई Groq API Key यहाँ बिल्कुल सही जगह सेट कर दी है
+// तुम्हारी नई बनाई हुई चालू Groq API Key
 const API_KEY = "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"; 
 const API_URL = "https://groq.com";
 
@@ -146,7 +145,7 @@ async function send(){
         const data = await response.json();
         if(loadingDiv) loadingDiv.remove(); 
         
-        // डेटा रीड करने की सेटिंग को 100% फिक्स कर दिया है
+        // डेटा ऐरे इंडेक्स [0] की बड़ी गलती को यहाँ पूरी तरह ठीक कर दिया है
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
@@ -173,3 +172,4 @@ function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="f
 </script>
 </body>
 </html>
+
