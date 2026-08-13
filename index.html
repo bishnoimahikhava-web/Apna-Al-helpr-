@@ -1,50 +1,116 @@
-<html lang="hi">
-<head><title>Apna AI Helper - Your AI Assistant Tool</title>
-<meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Apna AI Helper</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#fff;font-family:Arial,sans-serif}
-.app{max-width:900px;margin:auto;min-height:100vh}.head{padding:18px 15px;background:#11182b;border-bottom:1px solid #293550;position:sticky;top:0}
-.logo{font-size:23px;font-weight:bold}.sub{color:#9ba7c0;font-size:13px;margin-top:4px}
-.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px}
-.tool{background:#151e35;color:#fff;border:1px solid #2c3958;border-radius:12px;padding:11px 5px;font-size:12px;cursor:pointer}
-.chat{padding:10px 12px 125px}.msg{max-width:90%;padding:12px 14px;border-radius:16px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
-.user{background:#3157d5;margin-left:auto}.bot{background:#151e35;border:1px solid #293653}
-.empty{text-align:center;color:#96a2ba;padding:35px 15px}.composer{position:fixed;bottom:0;left:0;right:0;background:#0b1020;border-top:1px solid #293550;padding:10px}
-.row{max-width:900px;margin:auto;display:flex;gap:8px}textarea{flex:1;height:50px;resize:none;background:#151e35;color:#fff;border:1px solid #35435f;border-radius:14px;padding:13px;font-size:15px}
-button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px;font-weight:bold}.clear{margin-top:7px;background:#27324b;padding:7px 12px;font-size:12px}
-@media(max-width:600px){.tools{grid-template-columns:repeat(2,1fr)}.msg{max-width:95%}}
-</style>
+<html lang="hi">
+<head>
+    <!-- तुम्हारा असली Google AdSense कोड यहाँ हेड सेक्शन में सेट कर दिया है -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3822002228439364" crossorigin="anonymous"></script>
+
+    <title>Apna AI Helper - Your AI Assistant Tool</title>
+    <meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <style>
+        *{box-sizing:border-box}
+        body{margin:0;background:#0b1020;color:#fff;font-family:Arial,sans-serif}
+        .app{max-width:900px;margin:auto;min-height:100vh}
+        .head{padding:18px 15px;background:#11182b;border-bottom:1px solid #293550;position:sticky;top:50px}
+        .logo{font-size:23px;font-weight:bold}.sub{color:#9ba7c0;font-size:13px;margin-top:4px}
+
+        /* स्क्रीन के ऊपर की पतली विज्ञापन पट्टी (सिर्फ ऊपर चलेगी, पूरी स्क्रीन खराब नहीं करेगी) */
+        .ad-banner{position:sticky;top:0;left:0;right:0;height:50px;background:#1e293b;color:#38bdf8;text-align:center;line-height:50px;font-size:13px;font-weight:bold;z-index:1000;border-bottom:2px solid #38bdf8;overflow:hidden}
+
+        /* रिचार्ज/सब्सक्रिप्शन बॉक्स का कड़क स्टाइल */
+        .sub-box{background:#1e293b;border:2px solid #f59e0b;border-radius:12px;padding:15px;margin:12px;text-align:center}
+        .sub-title{font-size:16px;font-weight:bold;color:#f59e0b;margin-bottom:10px}
+        .plans{display:flex;gap:8px;justify-content:center;margin-top:10px}
+        .plan-btn{background:#f59e0b;color:#000;border:0;border-radius:8px;padding:8px 12px;font-size:12px;font-weight:bold;cursor:pointer}
+
+        .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px}
+        .tool{background:#151e35;color:#fff;border:1px solid #2c3958;border-radius:12px;padding:11px 5px;font-size:12px;cursor:pointer}
+        .chat{padding:10px 12px 125px}.msg{max-width:90%;padding:12px 14px;border-radius:16px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
+        .user{background:#3157d5;margin-left:auto}.bot{background:#151e35;border:1px solid #293653}
+        .empty{text-align:center;color:#96a2ba;padding:35px 15px}
+        .composer{position:fixed;bottom:0;left:0;right:0;background:#0b1020;border-top:1px solid #293550;padding:10px}
+        .row{max-width:900px;margin:auto;display:flex;gap:8px}
+        textarea{flex:1;height:50px;resize:none;background:#151e35;color:#fff;border:1px solid #35435f;border-radius:14px;padding:13px;font-size:15px}
+        button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px;font-weight:bold}
+        .clear{margin-top:7px;background:#27324b;padding:7px 12px;font-size:12px}
+        @media(max-width:600px){.tools{grid-template-columns:repeat(2,1fr)}.msg{max-width:95%}}
+    </style>
 </head>
 <body>
+
+<!-- सबसे ऊपर पतली विज्ञापन पट्टी (यहाँ ऑटोमेटिक विज्ञापन दिखेंगे) -->
+<div class="ad-banner" id="adBanner">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:100%;height:50px"
+         data-ad-client="ca-pub-3822002228439364"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
 <div class="app">
-<div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
-<div class="tools">
-<div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
-<div class="tool" onclick="p('इस विषय पर एक अच्छा आवेदन लिखो: ')">✍️ आवेदन</div>
-<div class="tool" onclick="p('इस गणित के सवाल को step-by-step हल करो: ')">🧮 गणित</div>
-<div class="tool" onclick="p('इसका आसान सारांश बनाओ: ')">📝 सारांश</div>
-<div class="tool" onclick="p('इस हिंदी को अंग्रेजी में अनुवाद करो: ')">🌐 अनुवाद</div>
-<div class="tool" onclick="p('परीक्षा के लिए महत्वपूर्ण प्रश्न और उत्तर बनाओ: ')">🎯 परीक्षा</div>
-<div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
-<div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
+    <div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
+
+    <!-- 1 महीना, 6 महीने और 1 साल का कड़क रिचार्ज सिस्टम -->
+    <div class="sub-box" id="subBox">
+        <div class="sub-title">👑 प्रीमियम मेंबरशिप प्लान (असीमित सवाल पूछें)</div>
+        <div style="font-size:13px; color:#cbd5e1;">फ्री यूज़र्स के लिए रोज़ केवल 5 सवाल की लिमिट है। आज ही रिचार्ज करें:</div>
+        <div class="plans">
+            <button class="plan-btn" onclick="buyPlan('1 महीना')">₹29 / 1 महीना</button>
+            <button class="plan-btn" onclick="buyPlan('6 महीने')">₹149 / 6 महीने</button>
+            <button class="plan-btn" onclick="buyPlan('1 साल')">₹249 / 1 साल</button>
+        </div>
+    </div>
+
+    <div class="tools">
+        <div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
+        <div class="tool" onclick="p('इस विषय पर एक अच्छा आवेदन लिखो: ')">✍️ आवेदन</div>
+        <div class="tool" onclick="p('इस गणित के सवाल को step-by-step हल करो: ')">🧮 गणित</div>
+        <div class="tool" onclick="p('इसका आसान सारांश बनाओ: ')">📝 सारांश</div>
+        <div class="tool" onclick="p('इस हिंदी को अंग्रेजी में अनुवाद करो: ')">🌐 अनुवाद</div>
+        <div class="tool" onclick="p('परीक्षा के लिए महत्वपूर्ण प्रश्न और उत्तर बनाओ: ')">🎯 परीक्षा</div>
+        <div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
+        <div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
+    </div>
+    
+    <div id="chat" class="chat">
+        <div class="empty" id="empty">
+            <div style="font-size:42px">🤖</div>
+            <h2>नमस्ते!</h2>
+            <p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p>
+            <small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small>
+        </div>
+    </div>
+    
+    <div class="composer">
+        <div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div>
+        <div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div>
+    </div>
 </div>
-<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
-<div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
-</div>
+
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
 const API_KEY = "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"; 
-const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+const API_URL = "https://groq.com";
+
+// फ्री यूज़र्स के लिए लिमिट सेटिंग्स
+let dailyLimit = 5;
+let questionsAsked = 0;
+let isPremiumUser = false;
 
 function p(t){input.value=t;input.focus()}
 function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
 
 async function send(){
+    // यदि 5 फ्री सवाल पूरे हो चुके हैं तो यूजर को रोकें
+    if(!isPremiumUser && questionsAsked >= dailyLimit){
+        add("⚠️ आपकी आज की 5 फ्री सवालों की लिमिट समाप्त हो चुकी है! आगे असीमित सवाल पूछने के लिए ऊपर दिए गए किसी भी एक प्लान से रिचार्ज करें।", 'bot');
+        return;
+    }
+
     let q=input.value.trim();
     if(!q)return;
     add(q,'user');
@@ -75,6 +141,7 @@ async function send(){
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
+            questionsAsked++; // सवाल की गिनती जोड़ें
         } else if (data && data.error) {
             add("API Error: " + data.error.message, 'bot');
         } else {
@@ -86,10 +153,15 @@ async function send(){
     }
 }
 
+function buyPlan(planName) {
+    alert("आपने " + planName + " का प्लान चुना है। रेज़रपे गेटवे जुड़ने के बाद यहाँ से सीधा पेमेंट होगा!");
+    isPremiumUser = true; 
+    document.getElementById('subBox').innerHTML = "<div class='sub-title' style='color:#10b981;'>👑 प्रीमियम मेंबरशिप एक्टिवेटेड (" + planName + " प्लान)</div>";
+}
+
 function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
 function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p></div>'}
 </script>
 </body>
 </html>
-
 
