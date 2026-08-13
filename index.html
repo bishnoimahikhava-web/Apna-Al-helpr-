@@ -74,7 +74,8 @@ async function send(){
         loadingDiv.remove(); 
         
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
-            let aiReply = data.choices[0].message.content;
+    let aiReply = data.choices[0].message.content;
+
             add(aiReply, 'bot');
         } else if (data && data.error) {
             add("API Error: " + data.error.message, 'bot');
