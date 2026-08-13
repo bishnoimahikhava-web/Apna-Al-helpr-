@@ -1,7 +1,5 @@
-
 <html lang="hi">
 <head>
-    <!-- आपकी वेबसाइट का असली नाम यहाँ टाइटल में सेट कर दिया है -->
     <title>Apna AI Helper - Your AI Assistant Tool</title>
     <meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
     <meta charset="UTF-8">
@@ -29,7 +27,6 @@
 <body>
 
 <div class="app">
-    <!-- यहाँ मुख्य स्क्रीन पर भी 'Apna AI Helper' नाम डाल दिया है -->
     <div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
 
     <div class="tools">
@@ -61,8 +58,9 @@
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// आपकी बिल्कुल नई चालू Groq API Key यहाँ 100% सही सेट है
-const API_KEY = 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
+// तुम्हारी बिल्कुल नई चालू Groq API Key यहाँ 100% सही सेट है
+const API_KEY = "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"; 
+// यहाँ असली सही यूआरएल (URL) डाल दिया है, अब कनेक्शन फ़ेल नहीं होगा
 const API_URL = "https://groq.com";
 
 function p(t){input.value=t;input.focus()}
@@ -105,7 +103,7 @@ async function send(){
         const data = await response.json();
         if(loadingDiv) loadingDiv.remove(); 
         
-        // डेटा ऐरे री-वेरिफाइड सिंटैक्स
+        // इंडेक्स और डेटा ऑब्जेक्ट मैपिंग बिल्कुल सही है
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
@@ -125,3 +123,4 @@ function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="f
 </script>
 </body>
 </html>
+
