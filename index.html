@@ -68,7 +68,8 @@ async function send(){
                 "Authorization": `Bearer ${API_KEY}`
             },
             body: JSON.stringify({
-                model: "llama-3.3-70b-versatile",
+                model: model: "gemini-2.5-flash-image"
+
                 messages: [{ role: "user", content: q }]
             })
         });
