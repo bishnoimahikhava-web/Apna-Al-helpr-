@@ -1,53 +1,101 @@
-
 <html lang="hi">
-<head><title>Apna AI Helper - Your AI Assistant Tool</title>
-<meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
+<head>
+    <!-- तुम्हारा असली Google AdSense कोड यहाँ हेड सेक्शन में पूरी तरह सेट है -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3822002228439364" crossorigin="anonymous"></script>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Apna AI Helper</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#0b1020;color:#fff;font-family:Arial,sans-serif}
-.app{max-width:900px;margin:auto;min-height:100vh}.head{padding:18px 15px;background:#11182b;border-bottom:1px solid #293550;position:sticky;top:0}
-.logo{font-size:23px;font-weight:bold}.sub{color:#9ba7c0;font-size:13px;margin-top:4px}
-.tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px}
-.tool{background:#151e35;color:#fff;border:1px solid #2c3958;border-radius:12px;padding:11px 5px;font-size:12px;cursor:pointer}
-.chat{padding:10px 12px 125px}.msg{max-width:90%;padding:12px 14px;border-radius:16px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
-.user{background:#3157d5;margin-left:auto}.bot{background:#151e35;border:1px solid #293653}
-.empty{text-align:center;color:#96a2ba;padding:35px 15px}.composer{position:fixed;bottom:0;left:0;right:0;background:#0b1020;border-top:1px solid #293550;padding:10px}
-.row{max-width:900px;margin:auto;display:flex;gap:8px}textarea{flex:1;height:50px;resize:none;background:#151e35;color:#fff;border:1px solid #35435f;border-radius:14px;padding:13px;font-size:15px}
-button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px;font-weight:bold}.clear{margin-top:7px;background:#27324b;padding:7px 12px;font-size:12px}
-@media(max-width:600px){.tools{grid-template-columns:repeat(2,1fr)}.msg{max-width:95%}}
-</style>
+    <title>Apna AI Helper - Your AI Assistant Tool</title>
+    <meta name="description" content="Apna AI Helper website par aapka swagat hai. Yahan aapko behtareen AI tools milenge.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <style>
+        *{box-sizing:border-box}
+        body{margin:0;background:#0b1020;color:#fff;font-family:Arial,sans-serif}
+        .app{max-width:900px;margin:auto;min-height:100vh}
+        .head{padding:18px 15px;background:#11182b;border-bottom:1px solid #293550;position:sticky;top:50px}
+        .logo{font-size:23px;font-weight:bold}.sub{color:#9ba7c0;font-size:13px;margin-top:4px}
+
+        /* स्क्रीन के ऊपर सिर्फ एक पतली लाइन (पट्टी) में विज्ञापन चलेगा */
+        .ad-banner{position:sticky;top:0;left:0;right:0;height:50px;background:#1e293b;color:#38bdf8;text-align:center;line-height:50px;font-size:13px;font-weight:bold;z-index:1000;border-bottom:2px solid #38bdf8;overflow:hidden}
+
+        .tools{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:12px}
+        .tool{background:#151e35;color:#fff;border:1px solid #2c3958;border-radius:12px;padding:11px 5px;font-size:12px;cursor:pointer}
+        .chat{padding:10px 12px 125px}.msg{max-width:90%;padding:12px 14px;border-radius:16px;margin:10px 0;white-space:pre-wrap;line-height:1.5}
+        .user{background:#3157d5;margin-left:auto}.bot{background:#151e35;border:1px solid #293653}
+        .empty{text-align:center;color:#96a2ba;padding:35px 15px}
+        .composer{position:fixed;bottom:0;left:0;right:0;background:#0b1020;border-top:1px solid #293550;padding:10px}
+        .row{max-width:900px;margin:auto;display:flex;gap:8px}
+        textarea{flex:1;height:50px;resize:none;background:#151e35;color:#fff;border:1px solid #35435f;border-radius:14px;padding:13px;font-size:15px}
+        button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px;font-weight:bold}
+        .clear{margin-top:7px;background:#27324b;padding:7px 12px;font-size:12px}
+        @media(max-width:600px){.tools{grid-template-columns:repeat(2,1fr)}.msg{max-width:95%}}
+    </style>
 </head>
 <body>
+
+<!-- सबसे ऊपर की पतली विज्ञापन पट्टी (यहाँ ऑटोमेटिक विज्ञापन दिखेंगे) -->
+<div class="ad-banner" id="adBanner">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:100%;height:50px"
+         data-ad-client="ca-pub-3822002228439364"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
 <div class="app">
-<div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
-<div class="tools">
-<div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
-<div class="tool" onclick="p('इस विषय पर एक अच्छा आवेदन लिखो: ')">✍️ आवेदन</div>
-<div class="tool" onclick="p('इस गणित के सवाल को step-by-step हल करो: ')">🧮 गणित</div>
-<div class="tool" onclick="p('इसका आसान सारांश बनाओ: ')">📝 सारांश</div>
-<div class="tool" onclick="p('इस हिंदी को अंग्रेजी में अनुवाद करो: ')">🌐 अनुवाद</div>
-<div class="tool" onclick="p('परीक्षा के लिए महत्वपूर्ण प्रश्न और उत्तर बनाओ: ')">🎯 परीक्षा</div>
-<div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
-<div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
+    <div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
+
+    <!-- रिचार्ज/अपग्रेड वाला डिब्बा यहाँ से पूरी तरह हटा दिया गया है -->
+
+    <div class="tools">
+        <div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
+        <div class="tool" onclick="p('इस विषय पर एक अच्छा आवेदन लिखो: ')">✍️ आवेदन</div>
+        <div class="tool" onclick="p('इस गणित के सवाल को step-by-step हल करो: ')">🧮 गणित</div>
+        <div class="tool" onclick="p('इसका आसान सारांश बनाओ: ')">📝 सारांश</div>
+        <div class="tool" onclick="p('इस हिंदी को अंग्रेजी में अनुवाद करो: ')">🌐 अनुवाद</div>
+        <div class="tool" onclick="p('परीक्षा के लिए महत्वपूर्ण प्रश्न और उत्तर बनाओ: ')">🎯 परीक्षा</div>
+        <div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
+        <div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
+    </div>
+    
+    <div id="chat" class="chat">
+        <div class="empty" id="empty">
+            <div style="font-size:42px">🤖</div>
+            <h2>नमस्ते!</h2>
+            <p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p>
+            <small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small>
+        </div>
+    </div>
+    
+    <div class="composer">
+        <div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div>
+        <div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div>
+    </div>
 </div>
-<div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
-<div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
-</div>
+
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-const API_KEY = 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
-const API_URL = "https://api.groq.com/openai/v1/chat/completions";
+// तुम्हारी बिल्कुल नई चालू Groq API Key यहाँ लगी है
+const API_KEY = "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"; 
+const API_URL = "https://groq.com";
 
 function p(t){input.value=t;input.focus()}
-function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
+function add(t,c){
+    let e=document.getElementById('empty');
+    if(e) e.remove();
+    let d=document.createElement('div');
+    d.className='msg '+c;
+    d.textContent=t;
+    chat.appendChild(d);
+    window.scrollTo(0,document.body.scrollHeight);
+}
 
 async function send(){
     let q=input.value.trim();
-    if(!q)return;
+    if(!q) return;
+    
     add(q,'user');
     input.value='';
     
@@ -62,7 +110,7 @@ async function send(){
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY}`
+                "Authorization": "Bearer " + API_KEY
             },
             body: JSON.stringify({
                 model: "llama-3.3-70b-versatile", 
@@ -71,11 +119,11 @@ async function send(){
         });
         
         const data = await response.json();
-        loadingDiv.remove(); 
+        if(loadingDiv) loadingDiv.remove(); 
         
+        // डेटा ऐरे `choices[0]` का सिंटैक्स बिल्कुल सही कर दिया है
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
-    let aiReply = data.choices[0].message.content;
-
+            let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
         } else if (data && data.error) {
             add("API Error: " + data.error.message, 'bot');
@@ -83,8 +131,8 @@ async function send(){
             add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया। कृपया पुनः प्रयास करें।", 'bot');
         }
     } catch (error) {
-        loadingDiv.remove();
-        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जांचें।", 'bot');
+        if(loadingDiv) loadingDiv.remove();
+        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया अपना इंटरनेट कनेक्शन जांचें।", 'bot');
     }
 }
 
@@ -93,4 +141,5 @@ function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="f
 </script>
 </body>
 </html>
+
 
