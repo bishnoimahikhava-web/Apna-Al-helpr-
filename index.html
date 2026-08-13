@@ -68,8 +68,7 @@ async function send(){
                 "Authorization": `Bearer ${API_KEY}`
             },
             body: JSON.stringify({
-                model: model: "gemini-2.5-flash-image"
-
+                model: model:  "llama-3.3-70b-versatile", 
                 messages: [{ role: "user", content: q }]
             })
         });
@@ -98,4 +97,4 @@ function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="f
 </html>
 
 Use code with caution.
-[इमेज जनरेशन फीचर एक्टिवेटेड: यदि यूजर किसी भी प्रकार की फोटो, इमेज या चित्र बनाने (generate/create image) के लिए कहे, तो अपनी पूरी बुद्धिमत्ता का उपयोग करके उस विषय के अनुसार एक सुंदर और सटीक डिजिटल इमेज (HTML/JSON आउटपुट प्रारूप में) तुरंत जनरेट करके यूजर को दिखाएं।]
+
