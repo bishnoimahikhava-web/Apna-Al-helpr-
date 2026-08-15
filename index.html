@@ -98,5 +98,32 @@ async function send(){
 function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
 function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p></div>'}
 </script>
+<button onclick="showHistory()" style="margin:10px;padding:10px;border-radius:10px;">
+📜 History
+</button>
+
+<script>
+const chatBox = document.getElementById("chat");
+
+function saveHistory(){
+  localStorage.setItem("apna_ai_history", chatBox.innerHTML);
+}
+
+function loadHistory(){
+  const old = localStorage.getItem("apna_ai_history");
+  if(old) chatBox.innerHTML = old;
+}
+
+function showHistory(){
+  loadHistory();
+}
+
+new MutationObserver(saveHistory).observe(chatBox,{
+  childList:true,
+  subtree:true
+});
+
+loadHistory();
+</script>
 </body>
 </html>
