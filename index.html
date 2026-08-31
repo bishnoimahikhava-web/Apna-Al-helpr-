@@ -48,6 +48,7 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 </div>
 
 <script>
+<script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
 const API_URL = "/api/chat";
@@ -74,7 +75,7 @@ async function send(){
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-             model:"openai/gpt-oss-120b",
+                model: "llama-3.1-8b-instant",
                 messages: [{ role: "user", content: q }]
             })
         });
@@ -82,19 +83,18 @@ async function send(){
         const data = await response.json();
         loadingDiv.remove();
         
+        // Groq API के सही रिस्पॉन्स फॉर्मेट को चेक करना
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
         } else if (data && data.error) {
-            add("API Error: " + data.error.message, 'bot');
+            add("Groq API Error: " + data.error.message, 'bot');
         } else {
             add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया। कृपया पुनः प्रयास करें।", 'bot');
         }
     } catch (error) {
-        loadingDiv.remove();
+        if(loadingDiv) loadingDiv.remove();
         add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जाँचें।", 'bot');
     }
 }
 </script>
-</body>
-</html>
