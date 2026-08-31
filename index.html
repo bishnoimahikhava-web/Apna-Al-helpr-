@@ -48,7 +48,6 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 </div>
 
 <script>
-<script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
 const API_URL = "/api/chat";
@@ -81,20 +80,37 @@ async function send(){
         });
         
         const data = await response.json();
-        loadingDiv.remove();
+        if(loadingDiv) loadingDiv.remove();
         
-        // Groq API के सही रिस्पॉन्स फॉर्मेट को चेक करना
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
         } else if (data && data.error) {
             add("Groq API Error: " + data.error.message, 'bot');
         } else {
-            add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया। कृपया पुनः प्रयास करें।", 'bot');
+            add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया।", 'bot');
         }
     } catch (error) {
         if(loadingDiv) loadingDiv.remove();
         add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जाँचें।", 'bot');
     }
 }
+
+// ⌨️ कीबोर्ड का Enter बटन दबाते ही मैसेज भेजने के लिए ऑटो-कनेक्शन
+if(input) {
+    input.addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            send();
+        }
+    });
+}
+
+// 🖱️ आपके स्क्रीन वाले "भेजें" बटन को ऑटो-कनेक्ट करने के लिए (अगर आईडी 'sendBtn' है)
+document.addEventListener("DOMContentLoaded", function() {
+    let btn = document.querySelector("button:contains('भेजें')") || document.getElementById("sendBtn");
+    if(btn) {
+        btn.setAttribute("onclick", "send()");
+    }
+});
 </script>
