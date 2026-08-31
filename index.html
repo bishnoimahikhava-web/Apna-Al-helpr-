@@ -74,7 +74,7 @@ async function send(){
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: "openai/gpt-3.5-turbo", // या आपका जो भी मॉडल नाम है
+                model: "llama3-8b-8192",
                 messages: [{ role: "user", content: q }]
             })
         });
