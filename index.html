@@ -49,42 +49,38 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
+
 const API_URL = "/api/chat";
 
-
-
-
-
 function p(t){input.value=t;input.focus()}
-function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
+function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
 
 async function send(){
     let q=input.value.trim();
     if(!q)return;
     add(q,'user');
     input.value='';
-
+    
     let loadingDiv = document.createElement('div');
     loadingDiv.className = 'msg bot';
-    loadingDiv.textContent = 'सोच रहा हूँ...⏳';
+    loadingDiv.textContent = 'सोच रहा हूँ...';
     chat.appendChild(loadingDiv);
     window.scrollTo(0,document.body.scrollHeight);
-
+    
     try {
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: { 
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${API_KEY}`
+            headers: {
+                "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model:"openai/gpt-oss-120b",
+                model: "openai/gpt-3.5-turbo", // या आपका जो भी मॉडल नाम है
                 messages: [{ role: "user", content: q }]
             })
         });
         
         const data = await response.json();
-        loadingDiv.remove(); 
+        loadingDiv.remove();
         
         if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
@@ -96,39 +92,9 @@ async function send(){
         }
     } catch (error) {
         loadingDiv.remove();
-        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जांचें।", 'bot');
+        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जाँचें।", 'bot');
     }
 }
-
-function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
-function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p></div>'}
-</script>
-<button onclick="showHistory()" style="margin:10px;padding:10px;border-radius:10px;">
-📜 History
-</button>
-
-<script>
-const chatBox = document.getElementById("chat");
-
-function saveHistory(){
-  localStorage.setItem("apna_ai_history", chatBox.innerHTML);
-}
-
-function loadHistory(){
-  const old = localStorage.getItem("apna_ai_history");
-  if(old) chatBox.innerHTML = old;
-}
-
-function showHistory(){
-  loadHistory();
-}
-
-new MutationObserver(saveHistory).observe(chatBox,{
-  childList:true,
-  subtree:true
-});
-
-loadHistory();
 </script>
 </body>
 </html>
