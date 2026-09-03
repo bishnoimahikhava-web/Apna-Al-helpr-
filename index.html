@@ -1,6 +1,7 @@
+Mahi ka number:
 <html lang="hi">
 <head> <!-- Google tag (gtag.js) -->
-<script async src="https://googletagmanager.com"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WY84HY2C0Q"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -31,8 +32,7 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <div class="app"> <div style="width:100%;max-width:728px;margin:8px auto;min-height:50px;text-align:center;overflow:hidden;">
   <!-- यहाँ Google AdSense का पूरा code आएगा -->
 </div>
-  <!-- 📲 डाउनलोड बटन: यहाँ तुम्हारी वेबसाइट का असली लिंक जोड़ दिया है ताकि appilix पर रीडायरेक्ट न हो -->
-  <a href="https://vercel.app" download style="display:block;background:#4772ff;color:white;text-align:center;padding:14px;margin:12px;border-radius:12px;text-decoration:none;font-weight:bold;">📲 APK DOWNLOAD</a>
+  <a href="https://bucket.appilix.com/app-apk-2ec1add28f9b4267ad65a55c333b6232-1786599214.apk" download style="display:block;background:#4772ff;color:white;text-align:center;padding:14px;margin:12px;border-radius:12px;text-decoration:none;font-weight:bold;">📲 APK DOWNLOAD</a>
 <div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
 <div class="tools">
 <div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
@@ -41,79 +41,93 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <div class="tool" onclick="p('इसका आसान सारांश बनाओ: ')">📝 सारांश</div>
 <div class="tool" onclick="p('इस हिंदी को अंग्रेजी में अनुवाद करो: ')">🌐 अनुवाद</div>
 <div class="tool" onclick="p('परीक्षा के लिए महत्वपूर्ण प्रश्न और उत्तर बनाओ: ')">🎯 परीक्षा</div>
-<div class="tool" onclick="p('this विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
+<div class="tool" onclick="p('इस विषय पर अच्छा लेख लिखो: ')">📰 लेख</div>
 <div class="tool" onclick="p('इस विषय की जानकारी आसान भाषा में दो: ')">💡 जानकारी</div>
 </div>
 <div id="chat" class="chat"><div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div></div>
-<div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..."></textarea><button id="sendBtn" onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
+<div class="composer"><div class="row"><textarea id="input" placeholder="अपना सवाल लिखें..." onkeydown="enterSend(event)"></textarea><button onclick="send()">भेजें</button></div><div class="row"><button class="clear" onclick="clearChat()">चैट साफ करें</button></div></div>
 </div>
 
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// Vercel का इंटरनल बैकएंड रूट (इसमें कोई बदलाव करने की जरूरत नहीं है)
-const API_URL = "/api/chat";
+const API_KEY =  "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";
+const API_URL =   "https://api.groq.com/openai/v1/chat/completions";
 
 function p(t){input.value=t;input.focus()}
-function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
-function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p><small>Groq Free AI लाइव हो चुका है! अपना कोई भी सवाल पूछें।</small></div>';}
+function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight)}
 
 async function send(){
     let q=input.value.trim();
     if(!q)return;
     add(q,'user');
     input.value='';
-    
+
     let loadingDiv = document.createElement('div');
     loadingDiv.className = 'msg bot';
-    loadingDiv.textContent = 'सोच रहा हूँ...';
+    loadingDiv.textContent = 'सोच रहा हूँ...⏳';
     chat.appendChild(loadingDiv);
     window.scrollTo(0,document.body.scrollHeight);
-    
+
     try {
         const response = await fetch(API_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": Bearer ${API_KEY}
             },
             body: JSON.stringify({
-                model: "llama-3.1-8b-instant",
+                model:"openai/gpt-oss-120b",
                 messages: [{ role: "user", content: q }]
             })
         });
         
         const data = await response.json();
-        if(loadingDiv) loadingDiv.remove();
+        loadingDiv.remove(); 
         
-        // Vercel backend और Groq API दोनों का सही रिस्पॉन्स फॉर्मेट मैचिंग फिक्स
-        if (data && data.reply) {
-            add(data.reply, 'bot');
-        } else if (data && data.choices && data.choices[0] && data.choices[0].message) {
+        if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
-        } else if (data && data.choices && data.choices.message) {
-            let aiReply = data.choices.message.content;
-            add(aiReply, 'bot');
         } else if (data && data.error) {
-            add("Groq API Error: " + data.error.message, 'bot');
+            add("API Error: " + data.error.message, 'bot');
         } else {
-            add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया।", 'bot');
+            add("माफ़ कीजिये, अभी सही जवाब नहीं मिल पाया। कृपया पुनः प्रयास करें।", 'bot');
         }
     } catch (error) {
-        if(loadingDiv) loadingDiv.remove();
-        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जाँचें।", 'bot');
+        loadingDiv.remove();
+        add("कनेक्शन में कुछ दिक्कत आ रही है। कृपया इंटरनेट या चाबी जांचें।", 'bot');
     }
 }
 
-// ⌨️ कीबोर्ड का Enter बटन दबाते ही मैसेज भेजने का ऑटो कनेक्शन फिक्स
-if(input) {
-    input.addEventListener("keydown", function(event) {
-        if (event.key === "Enter" && !event.shiftKey) {
-            event.preventDefault();
-            send();
-        }
-    });
+function enterSend(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}
+function clearChat(){chat.innerHTML='<div class="empty" id="empty"><div style="font-size:42px">🤖</div><h2>नमस्ते!</h2><p>अपना सवाल लिखें या ऊपर सुविधा चुनें।</p></div>'}
+</script>
+<button onclick="showHistory()" style="margin:10px;padding:10px;border-radius:10px;">
+📜 History
+</button>
+
+<script>
+const chatBox = document.getElementById("chat");
+
+function saveHistory(){
+  localStorage.setItem("apna_ai_history", chatBox.innerHTML);
 }
+
+function loadHistory(){
+  const old = localStorage.getItem("apna_ai_history");
+  if(old) chatBox.innerHTML = old;
+}
+
+function showHistory(){
+  loadHistory();
+}
+
+new MutationObserver(saveHistory).observe(chatBox,{
+  childList:true,
+  subtree:true
+});
+
+loadHistory();
 </script>
 </body>
 </html>
