@@ -31,7 +31,8 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <div class="app"> <div style="width:100%;max-width:728px;margin:8px auto;min-height:50px;text-align:center;overflow:hidden;">
   <!-- यहाँ Google AdSense का पूरा code आएगा -->
 </div>
-  <a href="https://appilix.com" download style="display:block;background:#4772ff;color:white;text-align:center;padding:14px;margin:12px;border-radius:12px;text-decoration:none;font-weight:bold;">📲 APK DOWNLOAD</a>
+  <!-- 📲 डाउनलोड बटन: यहाँ तुम्हारी वेबसाइट का असली लिंक जोड़ दिया है ताकि appilix पर रीडायरेक्ट न हो -->
+  <a href="https://vercel.app" download style="display:block;background:#4772ff;color:white;text-align:center;padding:14px;margin:12px;border-radius:12px;text-decoration:none;font-weight:bold;">📲 APK DOWNLOAD</a>
 <div class="head"><div class="logo">🤖 Apna AI Helper</div><div class="sub">पढ़ाई • लिखाई • गणित • जानकारी</div></div>
 <div class="tools">
 <div class="tool" onclick="p('मुझे यह सवाल आसान हिंदी में समझाओ: ')">📚 पढ़ाई</div>
@@ -50,7 +51,7 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// Vercel का इंटरनल रूट (इसे बदलने की कोई जरूरत नहीं है)
+// Vercel का इंटरनल बैकएंड रूट (इसमें कोई बदलाव करने की जरूरत नहीं है)
 const API_URL = "/api/chat";
 
 function p(t){input.value=t;input.focus()}
@@ -84,7 +85,7 @@ async function send(){
         const data = await response.json();
         if(loadingDiv) loadingDiv.remove();
         
-        // Vercel backend और Groq API दोनों के रिस्पॉन्स फॉर्मेट को सही से मैच करना
+        // Vercel backend और Groq API दोनों का सही रिस्पॉन्स फॉर्मेट मैचिंग फिक्स
         if (data && data.reply) {
             add(data.reply, 'bot');
         } else if (data && data.choices && data.choices[0] && data.choices[0].message) {
@@ -116,5 +117,6 @@ if(input) {
 </script>
 </body>
 </html>
+
 
 
