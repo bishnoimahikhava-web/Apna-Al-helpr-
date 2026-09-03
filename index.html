@@ -1,3 +1,4 @@
+
 <html lang="hi">
 <head> <!-- Google tag (gtag.js) -->
 <script async src="https://googletagmanager.com"></script>
@@ -49,7 +50,9 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
-const API_URL = "/api/chat";
+
+// ⚠️ ध्यान दें: यहाँ नीचे अपने Worker का असली URL पेस्ट कर देना
+const API_URL = "https://workers.dev";
 
 function p(t){input.value=t;input.focus()}
 function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
@@ -82,8 +85,10 @@ async function send(){
         const data = await response.json();
         if(loadingDiv) loadingDiv.remove();
         
-        // Vercel backend और Groq API दोनों का सही रिस्पॉन्स फॉर्मेट मैचिंग
-        if (data && data.choices && data.choices[0] && data.choices[0].message) {
+        // सुरक्षित चेकिंग: जो Worker से रिस्पॉन्स आ रहा है उसे सही से पढ़ना
+        if (data && data.reply) {
+            add(data.reply, 'bot');
+        } else if (data && data.choices && data.choices[0] && data.choices[0].message) {
             let aiReply = data.choices[0].message.content;
             add(aiReply, 'bot');
         } else if (data && data.choices && data.choices.message) {
