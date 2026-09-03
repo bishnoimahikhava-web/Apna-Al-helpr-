@@ -1,4 +1,3 @@
-
 <html lang="hi">
 <head> <!-- Google tag (gtag.js) -->
 <script async src="https://googletagmanager.com"></script>
@@ -51,8 +50,8 @@ button{background:#4772ff;color:white;border:0;border-radius:14px;padding:0 18px
 <script>
 const chat=document.getElementById('chat'),input=document.getElementById('input');
 
-// ⚠️ ध्यान दें: यहाँ नीचे अपने Worker का असली URL पेस्ट कर देना
-const API_URL = "https://workers.dev";
+// Vercel का इंटरनल रूट (इसे बदलने की कोई जरूरत नहीं है)
+const API_URL = "/api/chat";
 
 function p(t){input.value=t;input.focus()}
 function add(t,c){let e=document.getElementById('empty');if(e)e.remove();let d=document.createElement('div');d.className='msg '+c;d.innerHTML=t;chat.appendChild(d);window.scrollTo(0,document.body.scrollHeight);}
@@ -85,7 +84,7 @@ async function send(){
         const data = await response.json();
         if(loadingDiv) loadingDiv.remove();
         
-        // सुरक्षित चेकिंग: जो Worker से रिस्पॉन्स आ रहा है उसे सही से पढ़ना
+        // Vercel backend और Groq API दोनों के रिस्पॉन्स फॉर्मेट को सही से मैच करना
         if (data && data.reply) {
             add(data.reply, 'bot');
         } else if (data && data.choices && data.choices[0] && data.choices[0].message) {
@@ -117,4 +116,5 @@ if(input) {
 </script>
 </body>
 </html>
+
 
